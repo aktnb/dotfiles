@@ -99,7 +99,7 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
 
-# Set personal aliases, overriding those provided by Oh My Zsh libs,
+# Set personal aliases, overriding those provided by Oh My Zsh libs,alias
 # plugins, and themes. Aliases can be placed here, though Oh My Zsh
 # users are encouraged to define aliases within a top-level file in
 # the $ZSH_CUSTOM folder, with .zsh extension. Examples:
@@ -111,6 +111,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim='nvim'
+alias lg='lazygit'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
