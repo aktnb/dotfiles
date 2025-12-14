@@ -198,6 +198,77 @@ install_zsh() {
     fi
 }
 
+install_linux_packages() {
+    if ! is_linux; then
+        return
+    fi
+
+    info "installing packages for Linux..."
+
+    # neovim のインストール
+    if command -v nvim >/dev/null 2>&1; then
+        info "neovim already installed: $(command -v nvim)"
+    else
+        info "installing neovim..."
+        if command -v apt-get >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y neovim
+        elif command -v yum >/dev/null 2>&1; then
+            sudo yum install -y neovim
+        elif command -v dnf >/dev/null 2>&1; then
+            sudo dnf install -y neovim
+        elif command -v pacman >/dev/null 2>&1; then
+            sudo pacman -S --noconfirm neovim
+        else
+            warn "No supported package manager found. Please install neovim manually."
+        fi
+    fi
+
+    # lazygit のインストール
+    if command -v lazygit >/dev/null 2>&1; then
+        info "lazygit already installed: $(command -v lazygit)"
+    else
+        info "installing lazygit..."
+        if command -v apt-get >/dev/null 2>&1; then
+            # Ubuntu/Debian の場合、PPAまたはGitHubリリースから取得
+            local LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+            curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+            tar xf lazygit.tar.gz lazygit
+            sudo install lazygit /usr/local/bin
+            rm -f lazygit lazygit.tar.gz
+        elif command -v yum >/dev/null 2>&1; then
+            sudo yum install -y lazygit || {
+                warn "lazygit not available in yum. Installing from GitHub..."
+                local LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+                curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+                tar xf lazygit.tar.gz lazygit
+                sudo install lazygit /usr/local/bin
+                rm -f lazygit lazygit.tar.gz
+            }
+        elif command -v dnf >/dev/null 2>&1; then
+            sudo dnf install -y lazygit || {
+                warn "lazygit not available in dnf. Installing from GitHub..."
+                local LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+                curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+                tar xf lazygit.tar.gz lazygit
+                sudo install lazygit /usr/local/bin
+                rm -f lazygit lazygit.tar.gz
+            }
+        elif command -v pacman >/dev/null 2>&1; then
+            sudo pacman -S --noconfirm lazygit
+        else
+            warn "No supported package manager found. Please install lazygit manually."
+        fi
+    fi
+
+    if command -v nvim >/dev/null 2>&1; then
+        info "neovim successfully installed: $(command -v nvim)"
+    fi
+    if command -v lazygit >/dev/null 2>&1; then
+        info "lazygit successfully installed: $(command -v lazygit)"
+    fi
+}
+
 install_nerd_font_linux_optional() {
     if ! is_linux; then
         return
@@ -257,6 +328,7 @@ main() {
     install_zsh
 
     # linux
+    install_linux_packages
     install_nerd_font_linux_optional
 
     # shell environment

@@ -36,7 +36,18 @@ cd ~/dotfiles
 INSTALL_NERD_FONT=1 ./install.sh
 ```
 
-### Linux でのフォント設定
+**自動的にインストールされるパッケージ:**
+- zsh
+- neovim
+- lazygit
+
+**対応パッケージマネージャー:**
+- apt-get (Ubuntu/Debian)
+- yum (CentOS/RHEL)
+- dnf (Fedora)
+- pacman (Arch Linux)
+
+### Linux でのフォント設定（zsh + Powerlevel10k 用）
 
 `INSTALL_NERD_FONT=1` でフォントをインストールした後、ターミナルエミュレータの設定でフォントを **MesloLGS NF** に変更する必要があります。
 
