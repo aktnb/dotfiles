@@ -155,32 +155,91 @@ brew_bundle() {
     fi
 }
 
+install_zsh() {
+    if command -v zsh >/dev/null 2>&1; then
+        info "zsh already installed: $(command -v zsh)"
+        return
+    fi
+
+    info "zsh not found. installing..."
+
+    if is_mac; then
+        if command -v brew >/dev/null 2>&1; then
+            info "installing zsh via Homebrew..."
+            brew install zsh
+        else
+            die "Homebrew not found. Cannot install zsh automatically."
+        fi
+    elif is_linux; then
+        if command -v apt-get >/dev/null 2>&1; then
+            info "installing zsh via apt-get..."
+            sudo apt-get update
+            sudo apt-get install -y zsh
+        elif command -v yum >/dev/null 2>&1; then
+            info "installing zsh via yum..."
+            sudo yum install -y zsh
+        elif command -v dnf >/dev/null 2>&1; then
+            info "installing zsh via dnf..."
+            sudo dnf install -y zsh
+        elif command -v pacman >/dev/null 2>&1; then
+            info "installing zsh via pacman..."
+            sudo pacman -S --noconfirm zsh
+        else
+            die "No supported package manager found. Please install zsh manually."
+        fi
+    else
+        die "Unsupported OS. Please install zsh manually."
+    fi
+
+    if command -v zsh >/dev/null 2>&1; then
+        info "zsh successfully installed: $(command -v zsh)"
+    else
+        die "zsh installation failed"
+    fi
+}
+
 install_nerd_font_linux_optional() {
-    # brew 不使用のため、Linuxのみ自動導入オプションを用意
-    # macOSはGUIでフォント入れるのが安全なのでスキップ
     if ! is_linux; then
         return
     fi
 
-    if [[ "${INSTALL_NERD_FONT:-0}" != "1" ]]; then
-        warn "Nerd Font (FiraCode) は未インストールです。必要なら INSTALL_NERD_FONT=1 ./install.sh で導入します。"
+    if [[ -z "${INSTALL_NERD_FONT:-}" ]]; then
+        info "skip Nerd Font installation (set INSTALL_NERD_FONT=1 to install)"
         return
     fi
 
-    need_cmd curl
-    need_cmd unzip
-    need_cmd fc-cache
-
-    info "installing FiraCode Nerd Font (Linux)..."
     local font_dir="$HOME/.local/share/fonts"
     mkdir -p "$font_dir"
-    local tmp
-    tmp="$(mktemp -d)"
-    curl -fsSL -o "$tmp/FiraCode.zip" "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip"
-    unzip -o "$tmp/FiraCode.zip" -d "$font_dir" >/dev/null
-    fc-cache -fv >/dev/null
-    rm -rf "$tmp"
-    info "FiraCode Nerd Font installed. Terminal側のフォント設定も忘れずに。"
+
+    local base_url="https://github.com/romkatv/powerlevel10k-media/raw/master"
+    local fonts=(
+        "MesloLGS NF Regular.ttf"
+        "MesloLGS NF Bold.ttf"
+        "MesloLGS NF Italic.ttf"
+        "MesloLGS NF Bold Italic.ttf"
+    )
+
+    info "installing MesloLGS NF fonts..."
+    for font in "${fonts[@]}"; do
+        local url="$base_url/$font"
+        local dest="$font_dir/$font"
+
+        if [[ -f "$dest" ]]; then
+            info "already exists: $font"
+        else
+            info "downloading: $font"
+            curl -fsSL "$url" -o "$dest"
+        fi
+    done
+
+    if command -v fc-cache >/dev/null 2>&1; then
+        info "updating font cache..."
+        fc-cache -f "$font_dir"
+    else
+        warn "fc-cache not found. you may need to refresh font cache manually"
+    fi
+
+    info "MesloLGS NF installed to $font_dir"
 }
 
 
@@ -194,6 +253,9 @@ main() {
     install_homebrew
     brew_bundle
 
+    # ensure zsh is installed
+    install_zsh
+
     # linux
     install_nerd_font_linux_optional
 
@@ -204,7 +266,6 @@ main() {
     refresh_zsh_comp
 
     info "done."
-    info "next: exec zsh && p10k configure"
 }
 
 main "$@"
