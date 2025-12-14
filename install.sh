@@ -292,7 +292,9 @@ install_nerd_font_linux_optional() {
 
     info "installing MesloLGS NF fonts..."
     for font in "${fonts[@]}"; do
-        local url="$base_url/$font"
+        # URLエンコード: スペースを %20 に変換
+        local encoded_font="${font// /%20}"
+        local url="$base_url/$encoded_font"
         local dest="$font_dir/$font"
 
         if [[ -f "$dest" ]]; then
