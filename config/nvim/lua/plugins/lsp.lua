@@ -47,8 +47,10 @@ return {
           end,
       })
 
+      local lspconfig = require("lspconfig")
+
       -- Go
-      vim.lsp.config("gopls", {
+      lspconfig.gopls.setup({
         capabilities = capabilities,
         settings = {
           gopls = {
@@ -62,7 +64,7 @@ return {
       })
 
       -- Lua
-      vim.lsp.config("lua_ls", {
+      lspconfig.lua_ls.setup({
         capabilities = capabilities,
         settings = {
           Lua = {
@@ -73,11 +75,9 @@ return {
       })
 
       -- TypeScript / JavaScript
-      vim.lsp.config("ts_ls", {
+      lspconfig.ts_ls.setup({
         capabilities = capabilities,
       })
-
-      vim.lsp.enable({ "gopls", "lua_ls", "ts_ls" })
     end,
   },
 }
