@@ -36,3 +36,11 @@ opt.visualbell = true
 
 -- クリップボード共有
 opt.clipboard:append({"unnamedplus"})
+
+-- Markdown用の設定
+api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.wrap = true
+  end,
+})
