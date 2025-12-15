@@ -4,6 +4,5 @@ return {
   { import = "plugins.treesitter" },
   { import = "plugins.autotag" },
   { import = "plugins.autopairs" },
-  { import = "plugins.lsp" },
 }
 
