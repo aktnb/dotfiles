@@ -3,6 +3,7 @@ set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 OS="$(uname -s)"
+PRIVATE_MODE=false
 
 info() {
   printf "\033[1;32m[dotfiles]\033[0m %s\n" "$*"
@@ -68,6 +69,11 @@ setup_symlinks() {
         link "$DOTFILES_DIR/config/git/ignore" "$HOME/.config/git/ignore"
     fi
 
+    # プライベートモードの場合のみ nb の設定をリンク
+    if [[ "$PRIVATE_MODE" == true && -f "$DOTFILES_DIR/config/nb/.nbrc" ]]; then
+        link "$DOTFILES_DIR/config/nb/.nbrc" "$HOME/.nbrc"
+    fi
+
     if [[ -f "$DOTFILES_DIR/config/zsh/zprofile" ]]; then
         link "$DOTFILES_DIR/config/zsh/zprofile" "$HOME/.zprofile"
     fi
@@ -76,8 +82,10 @@ setup_symlinks() {
         link "$DOTFILES_DIR/config/zsh" ~/.config/zsh
     fi
 
-    # Sheldon設定ファイルのシンボリックリンク
-    if [[ -f "$DOTFILES_DIR/config/zsh/plugins.toml" ]]; then
+    # sheldon plugins: プライベートモードで分岐
+    if [[ "$PRIVATE_MODE" == true && -f "$DOTFILES_DIR/config/zsh/plugins.private.toml" ]]; then
+        link "$DOTFILES_DIR/config/zsh/plugins.private.toml" "$HOME/.config/sheldon/plugins.toml"
+    elif [[ -f "$DOTFILES_DIR/config/zsh/plugins.toml" ]]; then
         link "$DOTFILES_DIR/config/zsh/plugins.toml" "$HOME/.config/sheldon/plugins.toml"
     fi
 
@@ -87,6 +95,11 @@ setup_symlinks() {
 
     if [[ -d "$DOTFILES_DIR/config/tmux" ]]; then
         link "$DOTFILES_DIR/config/tmux" "$HOME/.config/tmux"
+    fi
+
+    # プライベートモードの場合のみ zeno の設定をリンク
+    if [[ "$PRIVATE_MODE" == true && -f "$DOTFILES_DIR/config/zeno/config.private.yml" ]]; then
+        link "$DOTFILES_DIR/config/zeno/config.private.yml" "$HOME/.config/zeno/config.yml"
     fi
 }
 
@@ -136,6 +149,12 @@ brew_bundle() {
         brew bundle --file="$DOTFILES_DIR/Brewfile"
     else
         warn "Brewfile not found. skip."
+    fi
+
+    # プライベートモードの場合は Brewfile.private も実行
+    if [[ "$PRIVATE_MODE" == true && -f "$DOTFILES_DIR/Brewfile.private" ]]; then
+        info "running brew bundle (private)"
+        brew bundle --file="$DOTFILES_DIR/Brewfile.private"
     fi
 }
 
@@ -301,6 +320,21 @@ install_nerd_font_linux_optional() {
 
 
 main() {
+    # コマンドライン引数の解析
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --private)
+                PRIVATE_MODE=true
+                info "private mode enabled"
+                shift
+                ;;
+            *)
+                warn "unknown option: $1"
+                shift
+                ;;
+        esac
+    done
+
     need_cmd git
     need_cmd curl
 

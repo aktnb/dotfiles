@@ -1,0 +1,4 @@
+tap "xwmx/taps"
+
+brew "nb"
+brew "deno"

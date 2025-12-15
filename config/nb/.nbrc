@@ -1,0 +1,15 @@
+export  NB_INDICATOR_AUDIO="🔉"
+export  NB_INDICATOR_BOOKMARK="🔖"
+export  NB_INDICATOR_DOCUMENT="📄"
+export  NB_INDICATOR_EBOOK="📖"
+export  NB_INDICATOR_ENCRYPTED="🔒"
+export  NB_INDICATOR_FOLDER="📂"
+export  NB_INDICATOR_IMAGE="🌄"
+export  NB_INDICATOR_PINNED="📌"
+export  NB_INDICATOR_TODO="✔️ "
+export  NB_INDICATOR_TODO_DONE="✅"
+export  NB_INDICATOR_VIDEO="📹"
+
+export EDITOR="nvim" # Set by `nb` • 2025年 12月15日 月曜日 23時17分08秒 JST
+
+export NB_DIR="${NB_DIR:-/Users/aktnb/git/nb}" # Set by `nb` • 2025年 12月15日 月曜日 23時18分13秒 JST
