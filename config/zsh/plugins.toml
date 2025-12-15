@@ -1,0 +1,22 @@
+# Sheldon configuration for zsh plugins
+shell = "zsh"
+
+# Theme: Powerlevel10k
+[plugins.powerlevel10k]
+github = "romkatv/powerlevel10k"
+
+# Completions
+[plugins.zsh-completions]
+github = "zsh-users/zsh-completions"
+
+# Core Plugins
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+use = ["{{ name }}.zsh"]
+
+[plugins.zeno]
+github = "yuki-yano/zeno.zsh"
+
+# Syntax Highlighting (must be loaded last)
+[plugins.fast-syntax-highlighting]
+github = "zdharma-continuum/fast-syntax-highlighting"

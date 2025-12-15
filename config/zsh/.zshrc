@@ -1,24 +1,30 @@
+# ============================================================
+# Powerlevel10k Instant Prompt
+# ============================================================
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# oh-my-zsh
-export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="powerlevel10k/powerlevel10k"
-plugins=(
-    git
-    zsh-completions
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-)
-source $ZSH/oh-my-zsh.sh
+# ============================================================
+# Sheldon Plugin Manager
+# ============================================================
+eval "$(sheldon source)"
+
+# ============================================================
+# Powerlevel10k Configuration
+# ============================================================
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# ============================================================
+# User Configuration
+# ============================================================
 ZSH_CONFIG_DIR="$HOME/.config/zsh"
 
-# 共通
-[[ -f "$ZSH_CONFIG_DIR/env.zsh" ]] && source "$ZSH_CONFIG_DIR/env.zsh"
+# 共通設定
 [[ -f "$ZSH_CONFIG_DIR/aliases.zsh" ]] && source "$ZSH_CONFIG_DIR/aliases.zsh"
 
-# 環境固有
+# 環境固有設定
 [[ -f "$HOME/.config/zsh/env.d.local/99-local.zsh" ]] && source "$HOME/.config/zsh/env.d.local/99-local.zsh"
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

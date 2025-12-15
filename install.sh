@@ -59,39 +59,6 @@ git_clone_or_update() {
     fi
 }
 
-install_oh_my_zsh() {
-    if [[ -d "$HOME/.oh-my-zsh" ]]; then
-        info "oh-my-zsh is already installed: $HOME/.oh-my-zsh"
-        return
-    fi
-
-    info "installing oh-my-zsh..."
-    if [[ -f "$HOME/.zshrc" ]]; then
-        local backup="$HOME/.zshrc.pre-ohmyzsh.$(date +%Y%m%d%H%M%S)"
-        cp "$HOME/.zshrc" "$backup"
-        warn "make a backup: $backup"
-    fi
-
-    RUNZSH=no CHSH=no KEEP_ZSHRC=yes \
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-}
-
-install_plugins_and_theme() {
-  local ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
-
-  git_clone_or_update "https://github.com/romkatv/powerlevel10k.git" \
-    "$ZSH_CUSTOM/themes/powerlevel10k"
-
-  git_clone_or_update "https://github.com/zsh-users/zsh-completions.git" \
-    "$ZSH_CUSTOM/plugins/zsh-completions"
-
-  git_clone_or_update "https://github.com/zsh-users/zsh-autosuggestions.git" \
-    "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
-
-  git_clone_or_update "https://github.com/zsh-users/zsh-syntax-highlighting.git" \
-    "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
-}
-
 setup_symlinks() {
     if [[ -f "$DOTFILES_DIR/config/zsh/.p10k.zsh" ]]; then
         link "$DOTFILES_DIR/config/zsh/.p10k.zsh" "$HOME/.p10k.zsh"
@@ -107,6 +74,11 @@ setup_symlinks() {
 
     if [[ -d "$DOTFILES_DIR/config/zsh" ]]; then
         link "$DOTFILES_DIR/config/zsh" ~/.config/zsh
+    fi
+
+    # Sheldon設定ファイルのシンボリックリンク
+    if [[ -f "$DOTFILES_DIR/config/zsh/plugins.toml" ]]; then
+        link "$DOTFILES_DIR/config/zsh/plugins.toml" "$HOME/.config/sheldon/plugins.toml"
     fi
 
     if [[ -d "$DOTFILES_DIR/config/nvim" ]]; then
@@ -346,8 +318,6 @@ main() {
     install_nerd_font_linux_optional
 
     # shell environment
-    install_oh_my_zsh
-    install_plugins_and_theme
     setup_symlinks
     refresh_zsh_comp
 
