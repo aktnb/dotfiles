@@ -112,6 +112,10 @@ setup_symlinks() {
     if [[ -d "$DOTFILES_DIR/config/nvim" ]]; then
         link "$DOTFILES_DIR/config/nvim" "$HOME/.config/nvim"
     fi
+
+    if [[ -d "$DOTFILES_DIR/config/tmux" ]]; then
+        link "$DOTFILES_DIR/config/tmux" "$HOME/.config/tmux"
+    fi
 }
 
 refresh_zsh_comp() {

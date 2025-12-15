@@ -8,6 +8,7 @@
 - **Brewfile**: Homebrew依存パッケージ定義（zsh, git, lazygit, Nerd Font）
 - **config/zsh/**: Zsh設定（Oh My Zsh + Powerlevel10k）
 - **config/nvim/**: Neovim設定（Lazy.nvim + LSP）
+- **config/tmux/**: tmux設定
 - **config/git/**: Git全体設定
 
 ### セットアップコマンド
@@ -43,6 +44,7 @@ p10k configure
 - `~/.zprofile` → `config/zsh/zprofile`
 - `~/.config/zsh/` → `config/zsh/` （ディレクトリごと）
 - `~/.config/nvim/` → `config/nvim/`
+- `~/.config/tmux/` → `config/tmux/`
 - `~/.config/git/ignore` → `config/git/ignore`
 
 #### Neovim設定
