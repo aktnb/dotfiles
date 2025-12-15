@@ -7,6 +7,7 @@ return {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"hrsh7th/cmp-nvim-lsp",
+			"b0o/schemastore.nvim",
 		},
 		config = function()
 			local cmp_nvim_lsp = require("cmp_nvim_lsp")
@@ -74,6 +75,35 @@ return {
 							telemetry = {
 								enable = false,
 							},
+						},
+					},
+				},
+				-- YAML言語サーバー
+				yamlls = {
+					settings = {
+						yaml = {
+							schemas = {
+								kubernetes = "*.yaml",
+								["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
+								["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
+								["http://json.schemastore.org/prettierrc"] = ".prettierrc.{yml,yaml}",
+								["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
+								["http://json.schemastore.org/circlecci-config"] = ".circleci/**/*.{yml,yaml}",
+							},
+							format = {
+								enable = true,
+							},
+							validate = true,
+							completion = true,
+						},
+					},
+				},
+				-- JSON言語サーバー
+				jsonls = {
+					settings = {
+						json = {
+							schemas = require("schemastore").json.schemas(),
+							validate = { enable = true },
 						},
 					},
 				},
