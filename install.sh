@@ -32,6 +32,14 @@ link() {
     src="$1"
     dst="$2"
     mkdir -p "$(dirname "$dst")"
+
+    # 既存のディレクトリがある場合は退避
+    if [[ -d "$dst" && ! -L "$dst" ]]; then
+        local backup="${dst}.backup.$(date +%Y%m%d%H%M%S)"
+        mv "$dst" "$backup"
+        warn "existing directory moved: $dst -> $backup"
+    fi
+
     ln -snf "$src" "$dst"
     info "linked: $dst"
 }
