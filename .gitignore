@@ -1,3 +1,5 @@
+.DS_Store
+
 .zsh_history
 .zsh_sessions/
 
@@ -6,3 +8,6 @@
 .zcompdump*.zwc
 
 .p10k.zsh.zwc
+
+# Neovim local LSP configuration (environment-specific)
+config/nvim/lua/lsp_servers_local.lua

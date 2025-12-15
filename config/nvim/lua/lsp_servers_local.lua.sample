@@ -1,0 +1,73 @@
+-- 環境ごとのLSPサーバー設定サンプル
+-- このファイルをコピーして lsp_servers_local.lua として保存してください
+-- lsp_servers_local.lua は .gitignore に含まれているため、環境ごとに異なる設定が可能です
+
+local M = {}
+
+-- 有効にする言語サーバーのリスト
+-- Mason で自動インストールされ、LSP が設定されます
+M.servers = {
+	-- Lua (デフォルトで有効)
+	lua_ls = {
+		settings = {
+			Lua = {
+				diagnostics = {
+					globals = { "vim" },
+				},
+				workspace = {
+					library = vim.api.nvim_get_runtime_file("", true),
+					checkThirdParty = false,
+				},
+				telemetry = {
+					enable = false,
+				},
+			},
+		},
+	},
+
+	-- TypeScript/JavaScript (コメントアウトを外して有効化)
+	-- ts_ls = {},
+
+	-- Python
+	-- pyright = {},
+
+	-- Go
+	-- gopls = {
+	-- 	settings = {
+	-- 		gopls = {
+	-- 			analyses = {
+	-- 				unusedparams = true,
+	-- 			},
+	-- 			staticcheck = true,
+	-- 		},
+	-- 	},
+	-- },
+
+	-- Rust
+	-- rust_analyzer = {
+	-- 	settings = {
+	-- 		["rust-analyzer"] = {
+	-- 			cargo = {
+	-- 				allFeatures = true,
+	-- 			},
+	-- 		},
+	-- 	},
+	-- },
+
+	-- HTML/CSS
+	-- html = {},
+	-- cssls = {},
+	-- tailwindcss = {},
+
+	-- JSON/YAML
+	-- jsonls = {},
+	-- yamlls = {},
+
+	-- Docker
+	-- dockerls = {},
+
+	-- その他の言語サーバーは以下から検索できます:
+	-- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
+}
+
+return M
