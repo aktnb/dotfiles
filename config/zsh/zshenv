@@ -1,0 +1,12 @@
+# Homebrew (ZDOTDIR 設定前に PATH を通す)
+if [[ "$(uname)" == "Darwin" && -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# ZDOTDIR を指定
+export ZDOTDIR="$HOME/.config/zsh"
+
+# Rust/Cargo (存在する場合のみ)
+if [[ -f "$HOME/.cargo/env" ]]; then
+  . "$HOME/.cargo/env"
+fi
