@@ -114,7 +114,8 @@ return {
 			local servers_to_setup = default_servers
 
 			if ok and local_config.servers then
-				servers_to_setup = local_config.servers
+				-- デフォルト設定とローカル設定をマージ（ローカルが優先）
+				servers_to_setup = vim.tbl_deep_extend("force", default_servers, local_config.servers)
 			end
 
 			-- 環境別のサーバーリストを取得

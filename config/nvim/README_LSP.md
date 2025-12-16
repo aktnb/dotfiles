@@ -1,6 +1,14 @@
 # LSP設定ガイド
 
-## 環境ごとに言語サーバーを設定する方法
+## デフォルトで有効な言語サーバー
+
+以下の言語サーバーは、すべての環境で自動的に有効化・インストールされます:
+
+- **Lua** (`lua_ls`): Neovim設定用
+- **YAML** (`yamlls`): Kubernetes、GitHub Actions等のスキーマサポート
+- **JSON** (`jsonls`): JSONスキーマ検証（schemastore統合）
+
+## 環境ごとに言語サーバーを追加する方法
 
 ### 1. ローカル設定ファイルの作成
 
@@ -13,17 +21,19 @@ cp lsp_servers_local.lua.sample lsp_servers_local.lua
 
 `lsp_servers_local.lua` を編集して、使いたい言語サーバーのコメントアウトを外します。
 
-**例: TypeScript と Python を有効化**
+**例: TypeScript と Python を追加**
 
 ```lua
 M.servers = {
-  lua_ls = { ... },
+  -- デフォルトのLua/YAML/JSONは自動で維持されるため記述不要
 
-  -- コメントアウトを外す
+  -- 追加する言語サーバーのコメントアウトを外す
   ts_ls = {},
   pyright = {},
 }
 ```
+
+**補足**: デフォルト設定（lua_ls/yamlls/jsonls）とローカル設定は自動的にマージされます。同じサーバー名で設定を上書きすることも可能です。
 
 ### 3. Neovim を再起動
 
@@ -46,6 +56,7 @@ nvim
 - **コードアクション**: `<leader>ca` でクイックフィックス
 - **フォーマット**: `<leader>f` でコード整形
 - **診断**: `[d` / `]d` でエラー/警告間を移動
+- **進捗表示**: fidget.nvim による言語サーバーのステータス表示
 
 ### キーマッピング一覧
 
@@ -76,19 +87,16 @@ nvim
 
 ## 利用可能な言語サーバー
 
-Mason でインストール可能な主要言語サーバー:
+`lsp_servers_local.lua.sample` に記載されている主要言語サーバー:
 
 - **TypeScript/JavaScript**: `ts_ls`
 - **Python**: `pyright`
-- **Go**: `gopls`
-- **Rust**: `rust_analyzer`
+- **Go**: `gopls`（設定例あり）
+- **Rust**: `rust_analyzer`（設定例あり）
 - **HTML**: `html`
 - **CSS**: `cssls`
 - **Tailwind CSS**: `tailwindcss`
-- **JSON**: `jsonls`
-- **YAML**: `yamlls`
 - **Docker**: `dockerls`
-- **Bash**: `bashls`
 
 完全なリストは [Mason LSPConfig](https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers) を参照。
 

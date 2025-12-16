@@ -6,24 +6,30 @@ local M = {}
 
 -- 有効にする言語サーバーのリスト
 -- Mason で自動インストールされ、LSP が設定されます
+--
+-- 注: 以下のサーバーはデフォルトで有効（記述不要）:
+--   - lua_ls (Lua)
+--   - yamlls (YAML)
+--   - jsonls (JSON)
+-- デフォルト設定とこのファイルの設定は自動的にマージされます
 M.servers = {
-	-- Lua (デフォルトで有効)
-	lua_ls = {
-		settings = {
-			Lua = {
-				diagnostics = {
-					globals = { "vim" },
-				},
-				workspace = {
-					library = vim.api.nvim_get_runtime_file("", true),
-					checkThirdParty = false,
-				},
-				telemetry = {
-					enable = false,
-				},
-			},
-		},
-	},
+	-- Lua設定を上書きする場合の例（通常は不要）
+	-- lua_ls = {
+	-- 	settings = {
+	-- 		Lua = {
+	-- 			diagnostics = {
+	-- 				globals = { "vim" },
+	-- 			},
+	-- 			workspace = {
+	-- 				library = vim.api.nvim_get_runtime_file("", true),
+	-- 				checkThirdParty = false,
+	-- 			},
+	-- 			telemetry = {
+	-- 				enable = false,
+	-- 			},
+	-- 		},
+	-- 	},
+	-- },
 
 	-- TypeScript/JavaScript (コメントアウトを外して有効化)
 	-- ts_ls = {},
