@@ -11,3 +11,5 @@
 
 # Neovim local LSP configuration (environment-specific)
 config/nvim/lua/lsp_servers_local.lua
+
+99-local.zsh
