@@ -59,10 +59,6 @@ M.servers = {
 	-- cssls = {},
 	-- tailwindcss = {},
 
-	-- JSON/YAML
-	-- jsonls = {},
-	-- yamlls = {},
-
 	-- Docker
 	-- dockerls = {},
 
