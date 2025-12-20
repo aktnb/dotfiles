@@ -9,3 +9,7 @@ if command -v lazygit >/dev/null 2>&2; then
 fi
 
 alias git-clean="git fetch --prune && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -d"
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
