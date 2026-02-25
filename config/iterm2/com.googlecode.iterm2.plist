@@ -19,7 +19,7 @@
 	<key>AiMaxTokens</key>
 	<integer>400000</integer>
 	<key>AiModel</key>
-	<string>gpt-5.1</string>
+	<string>gpt-5.2</string>
 	<key>AiResponseMaxTokens</key>
 	<integer>128000</integer>
 	<key>AitermURL</key>
@@ -29,7 +29,9 @@
 	<key>AlternateMouseScroll</key>
 	<false/>
 	<key>AutoHideTmuxClientSession</key>
-	<false/>
+	<true/>
+	<key>CloseBookmarksWindowAfterOpening</key>
+	<true/>
 	<key>ClosingTmuxWindowKillsTmuxWindows</key>
 	<true/>
 	<key>ClosingTmuxWindowKillsTmuxWindows_selection</key>
@@ -652,6 +654,19 @@
 	<false/>
 	<key>GlobalKeyMap</key>
 	<dict>
+		<key>0x46-0x120000-0x3</key>
+		<dict>
+			<key>Action</key>
+			<integer>23</integer>
+			<key>Apply Mode</key>
+			<integer>0</integer>
+			<key>Escaping</key>
+			<integer>2</integer>
+			<key>Text</key>
+			<string></string>
+			<key>Version</key>
+			<integer>2</integer>
+		</dict>
 		<key>0xd-0x20000-0x24</key>
 		<dict>
 			<key>Action</key>
@@ -668,8 +683,16 @@
 	</dict>
 	<key>HapticFeedbackForEsc</key>
 	<false/>
+	<key>Hotkey</key>
+	<true/>
+	<key>HotkeyChar</key>
+	<integer>32</integer>
+	<key>HotkeyCode</key>
+	<integer>49</integer>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
+	<key>HotkeyModifiers</key>
+	<integer>524288</integer>
 	<key>IRMemory</key>
 	<integer>4</integer>
 	<key>NeverWarnAboutShortLivedSessions_B2311AEC-B123-444E-957D-78AFD4A5D814</key>
@@ -679,6 +702,10 @@
 	<key>NeverWarnAboutShortLivedSessions_B81473B7-B265-4D71-A042-9D2CCE441415</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_B81473B7-B265-4D71-A042-9D2CCE441415_selection</key>
+	<integer>0</integer>
+	<key>NeverWarnAboutShortLivedSessions_EF400234-4F59-47A2-96B5-0C80F47CEB44</key>
+	<true/>
+	<key>NeverWarnAboutShortLivedSessions_EF400234-4F59-47A2-96B5-0C80F47CEB44_selection</key>
 	<integer>0</integer>
 	<key>New Bookmarks</key>
 	<array>
@@ -1455,7 +1482,7 @@
 			<key>Columns</key>
 			<integer>120</integer>
 			<key>Command</key>
-			<string></string>
+			<string>/opt/homebrew/bin/tmux -CC new -A -s main</string>
 			<key>Cursor Boost (Dark)</key>
 			<real>0.0</real>
 			<key>Cursor Boost (Light)</key>
@@ -1580,9 +1607,9 @@
 			<key>Cursor Type</key>
 			<integer>1</integer>
 			<key>Custom Command</key>
-			<string>No</string>
+			<string>Yes</string>
 			<key>Custom Directory</key>
-			<string>No</string>
+			<string>Recycle</string>
 			<key>Default Bookmark</key>
 			<string>No</string>
 			<key>Description</key>
@@ -1639,11 +1666,11 @@
 			<key>Guid</key>
 			<string>B81473B7-B265-4D71-A042-9D2CCE441415</string>
 			<key>Has Hotkey</key>
-			<true/>
+			<false/>
 			<key>Horizontal Spacing</key>
 			<real>1</real>
 			<key>HotKey Activated By Modifier</key>
-			<true/>
+			<false/>
 			<key>HotKey Alternate Shortcuts</key>
 			<array/>
 			<key>HotKey Characters</key>
@@ -1653,7 +1680,7 @@
 			<key>HotKey Key Code</key>
 			<integer>0</integer>
 			<key>HotKey Modifier Activation</key>
-			<integer>1</integer>
+			<integer>3</integer>
 			<key>HotKey Modifier Flags</key>
 			<integer>0</integer>
 			<key>HotKey Window Animates</key>
@@ -1773,7 +1800,7 @@
 			<key>Rows</key>
 			<integer>40</integer>
 			<key>Screen</key>
-			<integer>-2</integer>
+			<integer>-1</integer>
 			<key>Scrollback Lines</key>
 			<integer>1000</integer>
 			<key>Selected Text Color</key>
@@ -1873,9 +1900,9 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Title Components</key>
-			<integer>1</integer>
+			<integer>4</integer>
 			<key>Transparency</key>
-			<real>0.0</real>
+			<real>0.099955673758865243</real>
 			<key>Unlimited Scrollback</key>
 			<false/>
 			<key>Use Bold Font</key>
@@ -1915,7 +1942,7 @@
 			<key>Visual Bell</key>
 			<false/>
 			<key>Window Type</key>
-			<integer>1</integer>
+			<integer>0</integer>
 			<key>Working Directory</key>
 			<string>/Users/aktnb</string>
 		</dict>
@@ -1925,11 +1952,11 @@
 	<key>OpenArrangementAtStartup</key>
 	<false/>
 	<key>OpenBookmark</key>
-	<false/>
+	<true/>
 	<key>OpenNoWindowsAtStartup</key>
 	<true/>
 	<key>OpenTmuxWindowsIn</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>
@@ -1963,6 +1990,8 @@
 			<string>kNextWindowPointerAction</string>
 		</dict>
 	</dict>
+	<key>Print In Black And White</key>
+	<true/>
 	<key>PromptOnQuit</key>
 	<false/>
 	<key>PromptOnQuitEvenIfThereAreNoWindows</key>
@@ -1994,7 +2023,7 @@
 	<key>WindowNumber</key>
 	<false/>
 	<key>WindowPlacement</key>
-	<integer>2</integer>
+	<integer>3</integer>
 	<key>findMode_iTerm</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewPreferredModeKey</key>
