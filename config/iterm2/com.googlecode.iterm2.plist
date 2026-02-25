@@ -1902,7 +1902,7 @@
 			<key>Title Components</key>
 			<integer>4</integer>
 			<key>Transparency</key>
-			<real>0.099955673758865243</real>
+			<real>0.048426418439716311</real>
 			<key>Unlimited Scrollback</key>
 			<false/>
 			<key>Use Bold Font</key>
@@ -2002,6 +2002,8 @@
 	<true/>
 	<key>ShowFullScreenTabBar</key>
 	<false/>
+	<key>ShowPaneTitles</key>
+	<false/>
 	<key>SoundForEsc</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
@@ -2018,12 +2020,14 @@
 	<false/>
 	<key>UseLionStyleFullscreen</key>
 	<true/>
+	<key>UseTmuxStatusBar</key>
+	<true/>
 	<key>VisualIndicatorForEsc</key>
 	<false/>
 	<key>WindowNumber</key>
 	<false/>
 	<key>WindowPlacement</key>
-	<integer>3</integer>
+	<integer>1</integer>
 	<key>findMode_iTerm</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewPreferredModeKey</key>
