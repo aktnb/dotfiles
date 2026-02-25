@@ -68,10 +68,6 @@ setup_symlinks() {
         link "$DOTFILES_DIR/config/git/ignore" "$HOME/.config/git/ignore"
     fi
 
-    if [[ -f "$DOTFILES_DIR/config/nb/.nbrc" ]]; then
-        link "$DOTFILES_DIR/config/nb/.nbrc" "$HOME/.nbrc"
-    fi
-
     if [[ -d "$DOTFILES_DIR/config/zsh" ]]; then
         link "$DOTFILES_DIR/config/zsh" ~/.config/zsh
     fi
@@ -84,8 +80,8 @@ setup_symlinks() {
         link "$DOTFILES_DIR/config/nvim" "$HOME/.config/nvim"
     fi
 
-    if [[ -f "$DOTFILES_DIR/config/zeno/config.private.yml" ]]; then
-        link "$DOTFILES_DIR/config/zeno/config.private.yml" "$HOME/.config/zeno/config.yml"
+    if [[ -f "$DOTFILES_DIR/config/zeno/config.yml" ]]; then
+        link "$DOTFILES_DIR/config/zeno/config.yml" "$HOME/.config/zeno/config.yml"
     fi
 }
 

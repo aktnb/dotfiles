@@ -48,7 +48,6 @@ unlink_if_symlink() {
 # シンボリックリンクの削除（install.sh の setup_symlinks に対応）
 unlink_if_symlink "$HOME/.p10k.zsh"
 unlink_if_symlink "$HOME/.config/git/ignore"
-unlink_if_symlink "$HOME/.nbrc"
 unlink_if_symlink "$HOME/.zshenv" "confirm"
 unlink_if_symlink "$HOME/.config/zsh"
 unlink_if_symlink "$HOME/.config/sheldon/plugins.toml"
