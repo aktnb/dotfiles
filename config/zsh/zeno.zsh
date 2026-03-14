@@ -19,5 +19,7 @@ if [[ -n $ZENO_LOADED ]]; then
     bindkey '^xs' zeno-preprompt-snippet
 
     bindkey '^r' zeno-smart-history-selection
+
+    bindkey '^g' zeno-ghq-cd
 fi
 
