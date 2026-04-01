@@ -83,6 +83,10 @@ setup_symlinks() {
     if [[ -f "$DOTFILES_DIR/config/zeno/config.yml" ]]; then
         link "$DOTFILES_DIR/config/zeno/config.yml" "$HOME/.config/zeno/config.yml"
     fi
+
+    if [[ -f "$DOTFILES_DIR/config/ghostty/config" ]]; then
+        link "$DOTFILES_DIR/config/ghostty/config" "$HOME/.config/ghostty/config"
+    fi
 }
 
 refresh_zsh_comp() {
