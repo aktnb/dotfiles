@@ -5,5 +5,5 @@ brew "fzf"
 brew "sheldon"
 brew "deno"
 
-cask "iterm2"
+cask "ghostty"
 cask "raycast"
