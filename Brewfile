@@ -5,4 +5,5 @@ brew "fzf"
 brew "sheldon"
 brew "deno"
 
+cask "ghostty"
 cask "raycast"
