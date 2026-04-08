@@ -48,8 +48,13 @@ INSTALL_NERD_FONT=1 ./install.sh --private
 
 **自動的にインストールされるパッケージ:**
 - zsh
+- git
 - neovim
 - lazygit
+- fzf
+- sheldon
+- deno
+- cmux
 
 **対応パッケージマネージャー:**
 - apt-get (Ubuntu/Debian)
@@ -233,6 +238,8 @@ Brewfile で管理されているパッケージ：
 - **lazygit**: Git TUI
 - **fzf**: ファジーファインダー
 - **sheldon**: Zsh プラグインマネージャー
+- **deno**: JavaScript / TypeScript ランタイム
+- **cmux**: ターミナルマルチプレクサ
 
 ### GUI アプリケーション
 - **iTerm2**: ターミナルエミュレータ

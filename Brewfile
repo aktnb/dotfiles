@@ -7,3 +7,4 @@ brew "deno"
 
 cask "ghostty"
 cask "raycast"
+cask "cmux"
