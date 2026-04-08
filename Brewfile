@@ -4,6 +4,7 @@ brew "lazygit"
 brew "fzf"
 brew "sheldon"
 brew "deno"
+brew "rtk"
 
 cask "ghostty"
 cask "raycast"
