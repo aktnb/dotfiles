@@ -87,6 +87,10 @@ setup_symlinks() {
     if [[ -f "$DOTFILES_DIR/config/ghostty/config" ]]; then
         link "$DOTFILES_DIR/config/ghostty/config" "$HOME/.config/ghostty/config"
     fi
+
+    if [[ -f "$DOTFILES_DIR/config/cmux/settings.json" ]]; then
+        link "$DOTFILES_DIR/config/cmux/settings.json" "$HOME/.config/cmux/settings.json"
+    fi
 }
 
 refresh_zsh_comp() {

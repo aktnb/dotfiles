@@ -53,6 +53,7 @@ unlink_if_symlink "$HOME/.config/zsh"
 unlink_if_symlink "$HOME/.config/sheldon/plugins.toml"
 unlink_if_symlink "$HOME/.config/nvim"
 unlink_if_symlink "$HOME/.config/zeno/config.yml"
+unlink_if_symlink "$HOME/.config/cmux/settings.json"
 
 # zsh補完キャッシュの削除
 rm -f "$HOME/.zcompdump" "$HOME/.zcompdump.zwc" 2>/dev/null || true
