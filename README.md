@@ -247,6 +247,8 @@ Brewfile で管理されているパッケージ：
 
 ## Neovim 設定
 
+詳細は [config/nvim/README.md](./config/nvim/README.md) を参照してください。
+
 ### LSP 対応言語
 
 - Go (`gopls`)
