@@ -34,3 +34,8 @@ unset _zsh_local
 
 # zeno
 [[ -n $ZENO_LOADED && -f "$ZSH_CONFIG_DIR/zeno.zsh" ]] && source "$ZSH_CONFIG_DIR/zeno.zsh"
+
+# tmux
+if command -v tmux >/dev/null 2>&1; then
+  [ -z "$TMUX" ] && exec tmux new-session -A -s main
+fi

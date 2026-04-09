@@ -22,7 +22,7 @@ macos-titlebar-proxy-icon = hidden
 shell-integration = zsh
 
 # Keybind
-keybind = global:opt+ =toggle_visibility
+keybind = global:opt+=toggle_quick_terminal
 
 # Working Dir
 window-inherit-working-directory = true
