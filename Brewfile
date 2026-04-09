@@ -8,4 +8,3 @@ brew "rtk"
 
 cask "ghostty"
 cask "raycast"
-cask "cmux"
