@@ -24,9 +24,6 @@ need_cmd() {
 is_mac() {
     [[ "$OS" == "Darwin" ]]
 }
-is_linux() {
-    [[ "$OS" == "Linux" ]]
-}
 
 link() {
     src="$1"
@@ -96,11 +93,6 @@ refresh_zsh_comp() {
 }
 
 install_homebrew() {
-    if ! is_mac; then
-        info "not macOS. skip Homebrew."
-        return
-    fi
-
     if [[ -f "$DOTFILES_DIR/config/zsh/zshenv" ]]; then
         link "$DOTFILES_DIR/config/zsh/zshenv" "$HOME/.zshenv"
     fi
@@ -125,10 +117,6 @@ install_homebrew() {
 }
 
 brew_bundle() {
-    if ! is_mac; then
-        return
-    fi
-
     if ! command -v brew >/dev/null 2>&1; then
         warn "brew not found. skip brew bundle."
         return
@@ -150,32 +138,11 @@ install_zsh() {
 
     info "zsh not found. installing..."
 
-    if is_mac; then
-        if command -v brew >/dev/null 2>&1; then
-            info "installing zsh via Homebrew..."
-            brew install zsh
-        else
-            die "Homebrew not found. Cannot install zsh automatically."
-        fi
-    elif is_linux; then
-        if command -v apt-get >/dev/null 2>&1; then
-            info "installing zsh via apt-get..."
-            sudo apt-get update
-            sudo apt-get install -y zsh
-        elif command -v yum >/dev/null 2>&1; then
-            info "installing zsh via yum..."
-            sudo yum install -y zsh
-        elif command -v dnf >/dev/null 2>&1; then
-            info "installing zsh via dnf..."
-            sudo dnf install -y zsh
-        elif command -v pacman >/dev/null 2>&1; then
-            info "installing zsh via pacman..."
-            sudo pacman -S --noconfirm zsh
-        else
-            die "No supported package manager found. Please install zsh manually."
-        fi
+    if command -v brew >/dev/null 2>&1; then
+        info "installing zsh via Homebrew..."
+        brew install zsh
     else
-        die "Unsupported OS. Please install zsh manually."
+        die "Homebrew not found. Cannot install zsh automatically."
     fi
 
     if command -v zsh >/dev/null 2>&1; then
@@ -183,123 +150,6 @@ install_zsh() {
     else
         die "zsh installation failed"
     fi
-}
-
-install_linux_packages() {
-    if ! is_linux; then
-        return
-    fi
-
-    info "installing packages for Linux..."
-
-    # neovim のインストール
-    if command -v nvim >/dev/null 2>&1; then
-        info "neovim already installed: $(command -v nvim)"
-    else
-        info "installing neovim..."
-        if command -v apt-get >/dev/null 2>&1; then
-            sudo apt-get update
-            sudo apt-get install -y neovim
-        elif command -v yum >/dev/null 2>&1; then
-            sudo yum install -y neovim
-        elif command -v dnf >/dev/null 2>&1; then
-            sudo dnf install -y neovim
-        elif command -v pacman >/dev/null 2>&1; then
-            sudo pacman -S --noconfirm neovim
-        else
-            warn "No supported package manager found. Please install neovim manually."
-        fi
-    fi
-
-    # lazygit のインストール
-    if command -v lazygit >/dev/null 2>&1; then
-        info "lazygit already installed: $(command -v lazygit)"
-    else
-        info "installing lazygit..."
-        if command -v apt-get >/dev/null 2>&1; then
-            # Ubuntu/Debian の場合、PPAまたはGitHubリリースから取得
-            local LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-            curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-            tar xf lazygit.tar.gz lazygit
-            sudo install lazygit /usr/local/bin
-            rm -f lazygit lazygit.tar.gz
-        elif command -v yum >/dev/null 2>&1; then
-            sudo yum install -y lazygit || {
-                warn "lazygit not available in yum. Installing from GitHub..."
-                local LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-                curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-                tar xf lazygit.tar.gz lazygit
-                sudo install lazygit /usr/local/bin
-                rm -f lazygit lazygit.tar.gz
-            }
-        elif command -v dnf >/dev/null 2>&1; then
-            sudo dnf install -y lazygit || {
-                warn "lazygit not available in dnf. Installing from GitHub..."
-                local LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-                curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-                tar xf lazygit.tar.gz lazygit
-                sudo install lazygit /usr/local/bin
-                rm -f lazygit lazygit.tar.gz
-            }
-        elif command -v pacman >/dev/null 2>&1; then
-            sudo pacman -S --noconfirm lazygit
-        else
-            warn "No supported package manager found. Please install lazygit manually."
-        fi
-    fi
-
-    if command -v nvim >/dev/null 2>&1; then
-        info "neovim successfully installed: $(command -v nvim)"
-    fi
-    if command -v lazygit >/dev/null 2>&1; then
-        info "lazygit successfully installed: $(command -v lazygit)"
-    fi
-}
-
-install_nerd_font_linux_optional() {
-    if ! is_linux; then
-        return
-    fi
-
-    if [[ -z "${INSTALL_NERD_FONT:-}" ]]; then
-        info "skip Nerd Font installation (set INSTALL_NERD_FONT=1 to install)"
-        return
-    fi
-
-    local font_dir="$HOME/.local/share/fonts"
-    mkdir -p "$font_dir"
-
-    local base_url="https://github.com/romkatv/powerlevel10k-media/raw/master"
-    local fonts=(
-        "MesloLGS NF Regular.ttf"
-        "MesloLGS NF Bold.ttf"
-        "MesloLGS NF Italic.ttf"
-        "MesloLGS NF Bold Italic.ttf"
-    )
-
-    info "installing MesloLGS NF fonts..."
-    for font in "${fonts[@]}"; do
-        # URLエンコード: スペースを %20 に変換
-        local encoded_font="${font// /%20}"
-        local url="$base_url/$encoded_font"
-        local dest="$font_dir/$font"
-
-        if [[ -f "$dest" ]]; then
-            info "already exists: $font"
-        else
-            info "downloading: $font"
-            curl -fsSL "$url" -o "$dest"
-        fi
-    done
-
-    if command -v fc-cache >/dev/null 2>&1; then
-        info "updating font cache..."
-        fc-cache -f "$font_dir"
-    else
-        warn "fc-cache not found. you may need to refresh font cache manually"
-    fi
-
-    info "MesloLGS NF installed to $font_dir"
 }
 
 
@@ -321,10 +171,6 @@ main() {
 
     # ensure zsh is installed
     install_zsh
-
-    # linux
-    install_linux_packages
-    install_nerd_font_linux_optional
 
     # shell environment
     setup_symlinks
