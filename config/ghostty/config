@@ -1,14 +1,21 @@
 # Ghostty configuration
 
 # Font
-font-family = "MesloLGS NF"
+font-family = "JetBrainsMono Nerd Font"
 font-size = 18
 
 # Theme
 theme = Ayu
 background-opacity = 0.6
 background-blur = macos-glass-regular
+window-padding-x = 8
+window-padding-y = 8
 
+# Cursor
+cursor-style = "block"
+cursor-blink = true
+
+# Icon
 macos-titlebar-proxy-icon = hidden
 
 # Shell
