@@ -6,6 +6,9 @@ fi
 # ZDOTDIR を指定
 export ZDOTDIR="$HOME/.config/zsh"
 
+# XDG Base Directory
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # Rust/Cargo (存在する場合のみ)
 if [[ -f "$HOME/.cargo/env" ]]; then
   . "$HOME/.cargo/env"

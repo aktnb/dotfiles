@@ -84,6 +84,10 @@ setup_symlinks() {
     if [[ -f "$DOTFILES_DIR/config/ghostty/config" ]]; then
         link "$DOTFILES_DIR/config/ghostty/config" "$HOME/.config/ghostty/config"
     fi
+
+    if [[ -d "$DOTFILES_DIR/config/tmux" ]]; then
+        link "$DOTFILES_DIR/config/tmux" "$HOME/.config/tmux"
+    fi
 }
 
 refresh_zsh_comp() {
