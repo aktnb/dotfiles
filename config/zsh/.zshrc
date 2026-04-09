@@ -24,7 +24,10 @@ ZSH_CONFIG_DIR="$HOME/.config/zsh"
 [[ -f "$ZSH_CONFIG_DIR/aliases.zsh" ]] && source "$ZSH_CONFIG_DIR/aliases.zsh"
 
 # 環境固有設定
-[[ -f "$HOME/.config/zsh/env.d.local/99-local.zsh" ]] && source "$HOME/.config/zsh/env.d.local/99-local.zsh"
+for _zsh_local in "$HOME/.config/zsh/env.d.local/"*.zsh(N); do
+  source "$_zsh_local"
+done
+unset _zsh_local
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
