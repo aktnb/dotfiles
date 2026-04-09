@@ -9,3 +9,4 @@ brew "tmux"
 
 cask "ghostty"
 cask "raycast"
+cask "font-meslo-lg-nerd-font"

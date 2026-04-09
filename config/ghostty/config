@@ -1,11 +1,11 @@
 # Ghostty configuration
 
 # Font
-font-family = "JetBrainsMono Nerd Font"
+font-family = "MesloLGS NF"
 font-size = 18
 
 # Theme
-theme = Ayu
+theme = TokyoNight
 background-opacity = 0.6
 background-blur = macos-glass-regular
 window-padding-x = 8
@@ -13,7 +13,7 @@ window-padding-y = 8
 
 # Cursor
 cursor-style = "block"
-cursor-blink = true
+cursor-style-blink = true
 
 # Icon
 macos-titlebar-proxy-icon = hidden
@@ -24,11 +24,13 @@ shell-integration = zsh
 # Keybind
 keybind = global:opt+=toggle_quick_terminal
 
+window-decoration = true
+
 # Working Dir
 window-inherit-working-directory = true
 tab-inherit-working-directory = true
 split-inherit-working-directory = true
 
 # For tmux
-keybind = ctrl+d=text:¥x01|
-keybind = ctrl+shift+d=text:¥x01-
+keybind = ctrl+d=text:\x01|
+keybind = ctrl+shift+d=text:\x01-
