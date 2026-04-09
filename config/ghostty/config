@@ -28,3 +28,7 @@ keybind = global:opt+=toggle_quick_terminal
 window-inherit-working-directory = true
 tab-inherit-working-directory = true
 split-inherit-working-directory = true
+
+# For tmux
+keybind = ctrl+d=text:¥x01|
+keybind = ctrl+shift+d=text:¥x01-
