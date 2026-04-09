@@ -72,8 +72,8 @@ setup_symlinks() {
         link "$DOTFILES_DIR/config/zsh" ~/.config/zsh
     fi
 
-    if [[ -f "$DOTFILES_DIR/config/zsh/plugins.toml" ]]; then
-        link "$DOTFILES_DIR/config/zsh/plugins.toml" "$HOME/.config/sheldon/plugins.toml"
+    if [[ -f "$DOTFILES_DIR/config/sheldon/plugins.toml" ]]; then
+        link "$DOTFILES_DIR/config/sheldon/plugins.toml" "$HOME/.config/sheldon/plugins.toml"
     fi
 
     if [[ -d "$DOTFILES_DIR/config/nvim" ]]; then
