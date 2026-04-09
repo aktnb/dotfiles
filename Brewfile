@@ -5,6 +5,7 @@ brew "fzf"
 brew "sheldon"
 brew "deno"
 brew "rtk"
+brew "tmux"
 
 cask "ghostty"
 cask "raycast"
