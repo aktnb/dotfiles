@@ -13,3 +13,4 @@ alias git-clean="git fetch --prune && git branch -vv | grep ': gone]' | awk '{pr
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias .....='cd ../../../..'
