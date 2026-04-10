@@ -36,9 +36,8 @@ unset _zsh_local
 [[ -n $ZENO_LOADED && -f "$ZSH_CONFIG_DIR/zeno.zsh" ]] && source "$ZSH_CONFIG_DIR/zeno.zsh"
 
 # tmux
-# セッションがなければ新規作成して attach、あれば既存の main に attach する
-# GHOSTTY_RESOURCES_DIR が設定されていても quick terminal 判定はできないため、
-# exec で zsh を tmux に置き換えることで PTY を一本化し、初回起動の問題を回避する
+# $TERM_PROGRAM をそのままセッション名に使う（未設定なら "main"）
+# → ghostty は "ghostty"、vscode は "vscode" セッションに自動アタッチ
 if command -v tmux >/dev/null 2>&1 && [[ -z "$TMUX" ]]; then
-  exec tmux new-session -A -s main
+  exec tmux new-session -A -s "${TERM_PROGRAM:-main}"
 fi
