@@ -36,6 +36,8 @@ unset _zsh_local
 [[ -n $ZENO_LOADED && -f "$ZSH_CONFIG_DIR/zeno.zsh" ]] && source "$ZSH_CONFIG_DIR/zeno.zsh"
 
 # tmux
-if command -v tmux >/dev/null 2>&1; then
-  [ -z "$TMUX" ] && exec tmux new-session -A -s main
+# exec は使わず zsh プロセスを維持する
+# （exec tmux にすると Ghostty の quick terminal トグルが壊れるため）
+if command -v tmux >/dev/null 2>&1 && [[ -z "$TMUX" ]]; then
+  tmux new-session -A -s main
 fi

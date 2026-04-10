@@ -22,7 +22,7 @@ macos-titlebar-proxy-icon = hidden
 shell-integration = zsh
 
 # Keybind
-keybind = global:opt+=toggle_quick_terminal
+keybind = global:opt+space=toggle_quick_terminal
 
 window-decoration = true
 
