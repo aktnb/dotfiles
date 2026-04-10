@@ -36,8 +36,9 @@ unset _zsh_local
 [[ -n $ZENO_LOADED && -f "$ZSH_CONFIG_DIR/zeno.zsh" ]] && source "$ZSH_CONFIG_DIR/zeno.zsh"
 
 # tmux
-# exec は使わず zsh プロセスを維持する
-# （exec tmux にすると Ghostty の quick terminal トグルが壊れるため）
+# セッションがなければ新規作成して attach、あれば既存の main に attach する
+# GHOSTTY_RESOURCES_DIR が設定されていても quick terminal 判定はできないため、
+# exec で zsh を tmux に置き換えることで PTY を一本化し、初回起動の問題を回避する
 if command -v tmux >/dev/null 2>&1 && [[ -z "$TMUX" ]]; then
-  tmux new-session -A -s main
+  exec tmux new-session -A -s main
 fi
