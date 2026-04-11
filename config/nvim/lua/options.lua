@@ -22,6 +22,17 @@ opt.smartindent = true
 -- swap
 opt.swapfile = true
 
+-- 外部でファイルが変更された場合に自動リロード
+opt.autoread = true
+api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
+  pattern = "*",
+  callback = function()
+    if vim.fn.mode() ~= "c" then
+      vim.cmd("checktime")
+    end
+  end,
+})
+
 -- 検索設定
 opt.ignorecase = true
 opt.smartcase = true
