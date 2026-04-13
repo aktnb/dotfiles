@@ -20,6 +20,16 @@ if [[ -n $ZENO_LOADED ]]; then
 
     bindkey '^r' zeno-smart-history-selection
 
-    bindkey '^g' zeno-ghq-cd
+    # tmux セッション名を保持したまま ghq-cd する
+    function _zeno_ghq_cd_preserve_session() {
+        local session_name
+        [[ -n "$TMUX" ]] && session_name=$(tmux display-message -p '#S')
+        zle zeno-ghq-cd
+        local ret=$?
+        [[ -n "$TMUX" && -n "$session_name" ]] && tmux rename-session -- "$session_name"
+        return $ret
+    }
+    zle -N _zeno_ghq_cd_preserve_session
+    bindkey '^g' _zeno_ghq_cd_preserve_session
 fi
 
