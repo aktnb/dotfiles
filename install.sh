@@ -88,6 +88,10 @@ setup_symlinks() {
     if [[ -d "$DOTFILES_DIR/config/tmux" ]]; then
         link "$DOTFILES_DIR/config/tmux" "$HOME/.config/tmux"
     fi
+
+    if [[ -f "$DOTFILES_DIR/config/lazygit/config.yml" ]]; then
+        link "$DOTFILES_DIR/config/lazygit/config.yml" "$HOME/.config/lazygit/config.yml"
+    fi
 }
 
 refresh_zsh_comp() {
