@@ -83,6 +83,7 @@ Treesitter 対応言語: `lua`, `vim`, `bash`, `go`, `gomod`, `gosum`, `json`, `
 | Normal | `<leader>q` | エディタを終了 (`:q`) |
 | Normal | `<leader>h` | 行頭へ移動 (`^`) |
 | Normal | `<leader>l` | 行末へ移動 (`$`) |
+| Normal | `<leader>gg` | LazyGit を開く |
 | Normal | `<Esc><Esc>` | 検索ハイライトを消去 |
 | Insert | `jj` | ノーマルモードに戻る |
 | Visual | `<leader>h` | 行頭へ移動 (`^`) |
