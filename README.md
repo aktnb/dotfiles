@@ -88,7 +88,6 @@ Brewfile で管理されているパッケージ：
 - **fzf**: ファジーファインダー
 - **sheldon**: Zsh プラグインマネージャー
 - **deno**: JavaScript / TypeScript ランタイム
-- **rtk**: トークン最適化 CLI プロキシ
 
 ### GUI アプリケーション
 - **Ghostty**: ターミナルエミュレータ
