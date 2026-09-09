@@ -5,6 +5,12 @@ export ZENO_HOME=~/.config/zeno
 export ZENO_GIT_CAT="bat --color=always"
 
 if [[ -n $ZENO_LOADED ]]; then
+    # zsh-autosuggestions が未確定の履歴予測を消さずに
+    # zeno-auto-snippet-and-accept-line を実行してしまい、
+    # 実行内容は正しいまま画面表示だけ予測込みに見えるのを防ぐ
+    typeset -ga ZSH_AUTOSUGGEST_CLEAR_WIDGETS
+    ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(zeno-auto-snippet-and-accept-line)
+
     bindkey ' ' zeno-auto-snippet
 
     bindkey '^m' zeno-auto-snippet-and-accept-line
