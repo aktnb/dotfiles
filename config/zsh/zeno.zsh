@@ -37,5 +37,11 @@ if [[ -n $ZENO_LOADED ]]; then
     }
     zle -N _zeno_ghq_cd_preserve_session
     bindkey '^g' _zeno_ghq_cd_preserve_session
+
+    # deno cache をバックグラウンドで実行し、シェル起動をブロックしない
+    # （ZENO_DISABLE_EXECUTE_CACHE_COMMAND=1 で同期実行を無効化した分の代替）
+    if (( $+commands[deno] )) && [[ -n $ZENO_ROOT ]]; then
+        ( command deno cache --unstable-byonm --no-lock --no-check -- "${ZENO_ROOT}/src/cli.ts" &>/dev/null & ) &!
+    fi
 fi
 
