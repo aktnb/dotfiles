@@ -41,13 +41,22 @@ eval "$(sheldon source)"
 # 以内に更新されていれば compaudit（fpath 全体の権限監査、~20ms）を
 # スキップして高速化する。
 autoload -Uz compinit
-_zcompdump_stale=(${ZDOTDIR:-$HOME}/.zcompdump(Nmh+24))
+_zcompdump_path="${ZDOTDIR:-$HOME}/.zcompdump"
+_zcompdump_stale=(${_zcompdump_path}(Nmh+24))
 if (( $#_zcompdump_stale )); then
   compinit
 else
   compinit -C
 fi
 unset _zcompdump_stale
+
+# .zcompdump をバイトコンパイルしておくと、次回起動時の compinit が
+# パース済みの .zwc を自動的に読むようになり高速化する。
+# .zcompdump 本体より .zwc が古い（＝更新された）場合のみ再コンパイル。
+if [[ -f "$_zcompdump_path" && ( ! -f "${_zcompdump_path}.zwc" || "$_zcompdump_path" -nt "${_zcompdump_path}.zwc" ) ]]; then
+  zcompile "$_zcompdump_path"
+fi
+unset _zcompdump_path
 
 # ============================================================
 # Powerlevel10k Configuration
