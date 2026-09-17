@@ -6,7 +6,7 @@ font-size = 18
 
 # Theme
 theme = TokyoNight
-background-opacity = 0.6
+background-opacity = 1.0
 background-blur = macos-glass-regular
 window-padding-x = 8
 window-padding-y = 8
