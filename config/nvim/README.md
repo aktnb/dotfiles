@@ -81,6 +81,7 @@ Treesitter 対応言語: `lua`, `vim`, `bash`, `go`, `gomod`, `gosum`, `json`, `
 |--------|------|------|
 | Normal | `<leader>w` | ファイルを保存 (`:w`) |
 | Normal | `<leader>q` | エディタを終了 (`:q`) |
+| Normal | `<leader>t` | 下側にターミナルを開く（既存ターミナルを再利用） |
 | Normal | `<leader>h` | 行頭へ移動 (`^`) |
 | Normal | `<leader>l` | 行末へ移動 (`$`) |
 | Normal | `<leader>gg` | LazyGit を開く |
