@@ -23,6 +23,8 @@ shell-integration = zsh
 
 # Keybind
 keybind = global:opt+space=toggle_visibility
+# Send LF for Codex multiline prompts through tmux
+keybind = shift+enter=text:\x0a
 
 window-decoration = true
 
