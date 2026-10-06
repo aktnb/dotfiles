@@ -18,6 +18,9 @@ cursor-style-blink = true
 # Icon
 macos-titlebar-proxy-icon = hidden
 
+# Close confirmation
+confirm-close-surface = false
+
 # Shell
 shell-integration = zsh
 
