@@ -1,3 +1,8 @@
+if [[ -d /opt/homebrew/share/zsh/functions ]]; then
+  fpath=(/opt/homebrew/share/zsh/functions $fpath)
+  typeset +x FPATH
+fi
+
 # ============================================================
 # tmux
 # ============================================================
@@ -11,17 +16,6 @@
 if command -v tmux >/dev/null 2>&1 && [[ -z "$TMUX" ]]; then
   exec tmux new-session -A -s "${TERM_PROGRAM:-main}"
 fi
-
-# ============================================================
-# Standard Zsh Functions
-# ============================================================
-# tmux 等が Homebrew 更新前の FPATH を保持していても、現在の zsh の
-# 標準関数をロードできるようにする。継承した追加パスも残しておく。
-typeset -U fpath
-fpath=(
-  "${(@s.:.)$(command env -u FPATH zsh -fc 'print -r -- "$FPATH"')}"
-  "${fpath[@]}"
-)
 
 # ============================================================
 # Powerlevel10k Instant Prompt
