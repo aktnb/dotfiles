@@ -1,3 +1,8 @@
+if [[ -d /opt/homebrew/share/zsh/functions ]]; then
+  fpath=(/opt/homebrew/share/zsh/functions $fpath)
+  typeset +x FPATH
+fi
+
 # ============================================================
 # tmux
 # ============================================================
