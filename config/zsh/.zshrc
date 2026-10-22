@@ -13,6 +13,17 @@ if command -v tmux >/dev/null 2>&1 && [[ -z "$TMUX" ]]; then
 fi
 
 # ============================================================
+# Standard Zsh Functions
+# ============================================================
+# tmux 等が Homebrew 更新前の FPATH を保持していても、現在の zsh の
+# 標準関数をロードできるようにする。継承した追加パスも残しておく。
+typeset -U fpath
+fpath=(
+  "${(@s.:.)$(command env -u FPATH zsh -fc 'print -r -- "$FPATH"')}"
+  "${fpath[@]}"
+)
+
+# ============================================================
 # Powerlevel10k Instant Prompt
 # ============================================================
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
