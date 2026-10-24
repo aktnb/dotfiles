@@ -43,7 +43,8 @@ $ZDOTDIR/.zshrc (→ .zshrc)
 | キー | 動作 |
 | --- | --- |
 | `Space` | スニペット自動展開 |
-| `Enter` | スニペット展開 + 実行 |
+| `Enter` | 実行（Zeno を経由しない） |
+| `Ctrl-x Enter` | スニペット展開 + 実行 |
 | `Ctrl-x x` | スニペット挿入 |
 | `Ctrl-r` | 履歴検索 |
 | `Ctrl-g` | ghq リポジトリへ移動 |

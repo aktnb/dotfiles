@@ -13,12 +13,13 @@ if [[ -n $ZENO_LOADED ]]; then
 
     bindkey ' ' zeno-auto-snippet
 
-    bindkey '^m' zeno-auto-snippet-and-accept-line
+    # 通常の実行では Zeno サーバーの応答を待たない
+    bindkey '^m' accept-line
 
     bindkey '^xx' zeno-insert-snippet
 
     bindkey '^x ' zeno-insert-space
-    bindkey '^x^m' accept-line
+    bindkey '^x^m' zeno-auto-snippet-and-accept-line
     bindkey '^x^z' zeno-toggle-auto-snippet
 
     bindkey '^xp' zeno-preprompt
