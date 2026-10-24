@@ -11,14 +11,15 @@ if [[ -n $ZENO_LOADED ]]; then
     typeset -ga ZSH_AUTOSUGGEST_CLEAR_WIDGETS
     ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(zeno-auto-snippet-and-accept-line)
 
-    bindkey ' ' zeno-auto-snippet
+    # 通常の空白入力では Zeno サーバーの応答を待たない
+    bindkey ' ' self-insert
 
     # 通常の実行では Zeno サーバーの応答を待たない
     bindkey '^m' accept-line
 
     bindkey '^xx' zeno-insert-snippet
 
-    bindkey '^x ' zeno-insert-space
+    bindkey '^x ' zeno-auto-snippet
     bindkey '^x^m' zeno-auto-snippet-and-accept-line
     bindkey '^x^z' zeno-toggle-auto-snippet
 

@@ -42,7 +42,8 @@ $ZDOTDIR/.zshrc (→ .zshrc)
 
 | キー | 動作 |
 | --- | --- |
-| `Space` | スニペット自動展開 |
+| `Space` | 空白入力（Zeno を経由しない） |
+| `Ctrl-x Space` | スニペット展開 |
 | `Enter` | 実行（Zeno を経由しない） |
 | `Ctrl-x Enter` | スニペット展開 + 実行 |
 | `Ctrl-x x` | スニペット挿入 |
